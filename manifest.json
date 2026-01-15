@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Walmart Image Zipper",
+  "version": "2.0",
+  "description": "下载沃尔玛商品图片并打包为ZIP",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "downloads"
+  ],
+  "host_permissions": [
+    "*://*.walmart.com/*",
+    "*://*.walmartimages.com/*" 
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
