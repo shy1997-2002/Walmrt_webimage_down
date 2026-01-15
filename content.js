@@ -39,14 +39,17 @@
         let productTitle = document.title.split(' - ')[0].trim();
         productTitle = productTitle.replace(/[\\/:*?"<>|]/g, "_").substring(0, 50);
 
-        if(confirm(`找到 ${urlArray.length} 张图片。\n准备打包下载为: [ ${productTitle}.zip ]\n是否继续？`)) {
-            // 发送给后台，动作为 'download_zip'
-            chrome.runtime.sendMessage({
-                action: "download_zip",
-                urls: urlArray,
-                folderName: productTitle
-            });
-        }
+        console.log(`找到 ${urlArray.length} 张图片，正在请求后台打包...`);
+
+        // --- 修改点：直接发送消息，不再弹出 confirm 确认框 ---
+        chrome.runtime.sendMessage({
+            action: "download_zip",
+            urls: urlArray,
+            folderName: productTitle
+        });
+
+        // 可选：可以在控制台或页面角落给个轻微的提示，或者什么都不做
+        // alert("下载已开始！"); // 如果你需要提示，可以取消这行的注释
     } else {
         alert("未找到符合要求的 ASR 图片。");
     }
